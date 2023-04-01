@@ -14,12 +14,16 @@ class CloudNinePayrollSalesforceConnection:
 
 def get_credentials():
 
+    # retrieve environment variables
     apikey = os.environ.get('ONEPASSWORD_API_KEY')
+    url = os.environ.get('ONEPASSWORD_URL')
+    vaultName = os.environ.get('ONEPASSWORD_VAULT_NAME')
+    itemName = os.environ.get('ONEPASSWORD_ITEM_NAME')
+    apiVersion = os.environ.get('ONEPASSWORD_API_VERSION')
 
-    url = "https://2CloudNine49807.jitterbit.cc/Production/1.0/retrieveCredentials"
     payload = json.dumps({
-        "vaultName": "Jitterbit Integration Customer Users",
-        "itemName": "Jitterbit User"
+        "vaultName": vaultName,
+        "itemName": itemName
     })
     headers = {
         'Api-Key': apikey,
@@ -27,10 +31,10 @@ def get_credentials():
     }
     response = requests.post(url, headers=headers, data=payload)
     return {
-        'username': response.json()['username'],
-        'password': response.json()['password'],
-        'security_token': response.json()['token'],
-        'version': '54.0'
+        'username': response.json()['data']['username'],
+        'password': response.json()['data']['password'],
+        'security_token': response.json()['data']['token'],
+        'version': apiVersion
     }
 
 
