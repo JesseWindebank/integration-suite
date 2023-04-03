@@ -2,6 +2,8 @@ import os
 import json
 import requests
 
+# retrieve credentials from 1password item
+
 
 def get_credentials(vaultName, itemName):
 
@@ -37,8 +39,3 @@ def get_credentials(vaultName, itemName):
     except KeyError as e:
         error_data = response.json()['data']
         print(f"An error occurred: {error_data['error']}")
-
-
-credentials = get_credentials('Sage Intacct', 'Intacct (DFP) - Sandbox')
-
-print(credentials)

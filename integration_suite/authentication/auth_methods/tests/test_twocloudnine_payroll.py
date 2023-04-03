@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 import requests
 from simple_salesforce import Salesforce
-from authentication_service.auth_methods.twocloudnine_payroll import CloudNinePayrollSalesforceConnection, get_credentials
+from authentication.auth_methods.twocloudnine_payroll import CloudNinePayrollSalesforceConnection, get_credentials
 
 
 import sys

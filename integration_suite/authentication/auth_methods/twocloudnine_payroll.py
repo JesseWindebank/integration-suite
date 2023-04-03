@@ -11,6 +11,8 @@ class CloudNinePayrollSalesforceConnection:
     def get_salesforce_connection(self):
         return self.sf
 
+# retrieve credentials from 1password item
+
 
 def get_credentials(vaultName, itemName):
 
