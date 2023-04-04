@@ -1,8 +1,10 @@
-from extraction.endpoints import sage_intacct
+from extract.endpoints import extract_sage_intacct
+from transform.endpoints import transform_sage_intacct
 
 
 def main():
-    sage_intacct.extract_departments()
+    extract_sage_intacct.extract_departments()
+    transform_sage_intacct.transform_departments()
 
 
 if __name__ == "__main__":

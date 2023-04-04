@@ -1,5 +1,5 @@
 import requests
-from authentication.auth_methods.auth_sage_intacct import get_credentials
+from auth.endpoints.auth_sage_intacct import get_credentials
 from datetime import datetime
 import uuid
 

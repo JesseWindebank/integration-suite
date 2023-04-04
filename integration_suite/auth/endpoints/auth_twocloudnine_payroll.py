@@ -50,7 +50,8 @@ def get_credentials(vaultName, itemName):
         print(f"An error occurred: {error_data['error']}")
 
 
-credentials = get_credentials(
-    'Jitterbit Integration Customer Users', 'Jitterbit User')
-cloud_nine_payroll_conn = CloudNinePayrollSalesforceConnection(credentials)
-sf = cloud_nine_payroll_conn.get_salesforce_connection()
+if __name__ == "__main__":
+    credentials = get_credentials(
+        'Jitterbit Integration Customer Users', 'Jitterbit User')
+    cloud_nine_payroll_conn = CloudNinePayrollSalesforceConnection(credentials)
+    sf = cloud_nine_payroll_conn.get_salesforce_connection()
