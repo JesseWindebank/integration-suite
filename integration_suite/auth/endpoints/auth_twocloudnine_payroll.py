@@ -11,10 +11,8 @@ class CloudNinePayrollSalesforceConnection:
     def get_salesforce_connection(self):
         return self.sf
 
-# retrieve credentials from 1password item
 
-
-def get_credentials(vaultName, itemName):
+def get_credentials(vault_name, item_name):
 
     # retrieve environment variables
     apikey = os.environ.get('ONEPASSWORD_API_KEY')
@@ -23,8 +21,8 @@ def get_credentials(vaultName, itemName):
 
     # define json payload
     payload = json.dumps({
-        "vaultName": vaultName,
-        "itemName": itemName
+        "vaultName": vault_name,
+        "itemName": item_name
     })
 
     # define headers
@@ -50,8 +48,10 @@ def get_credentials(vaultName, itemName):
         print(f"An error occurred: {error_data['error']}")
 
 
-if __name__ == "__main__":
-    credentials = get_credentials(
-        'Jitterbit Integration Customer Users', 'Jitterbit User')
+def get_sf_connection(vault_name="Jitterbit Integration Customer Users", item_name='Rene Demo Integration User'):
+    credentials = get_credentials(vault_name, item_name)
+
+    print(f'credentials: {credentials}')
+
     cloud_nine_payroll_conn = CloudNinePayrollSalesforceConnection(credentials)
-    sf = cloud_nine_payroll_conn.get_salesforce_connection()
+    return cloud_nine_payroll_conn.get_salesforce_connection()
