@@ -3,10 +3,10 @@ from transform.endpoints.transform_intacct_base import transform_departments
 from auth.endpoints.auth_twocloudnine_payroll import get_sf_connection
 
 
-def get_record_type_id(sf) -> str:
+def get_record_type_id(sf, record_type_name) -> str:
     query = (
         "SELECT Id FROM RecordType WHERE SobjectType = 'tc9_bgl__Acc_Segments__c'"
-        " AND DeveloperName = 'Assignment_Department'"
+        f" AND DeveloperName = '{record_type_name}'"
     )
     result = sf.query(query)['records'][0]['Id']
     return result
@@ -32,7 +32,7 @@ def prepare_department_data(department: Dict[str, str], record_type_id: str, acc
 
 
 def upsert_departments(sf, departments_data: List[Dict[str, str]]) -> None:
-    record_type_id = get_record_type_id(sf)
+    record_type_id = get_record_type_id(sf, 'Assignment_Department')
     accounting_system_id = get_accounting_system_id(sf)
 
     upsert_data = [

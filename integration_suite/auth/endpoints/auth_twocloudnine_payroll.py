@@ -34,18 +34,27 @@ def get_credentials(vault_name, item_name):
     # make request
     try:
         response = requests.post(url, headers=headers, data=payload)
-        response_data = response.json()['data']
+
+        # Check if the response contains a valid JSON object
+        try:
+            response_data = response.json()
+        except json.JSONDecodeError:
+            raise KeyError("Invalid or empty JSON response")
+
+        data = response_data.get('data')
+
+        if 'error' in data:
+            raise KeyError(data['error'])
+
         return {
-            'username': response_data.get('username'),
-            'password': response_data.get('password'),
-            'security_token': response_data.get('token'),
+            'username': data.get('username'),
+            'password': data.get('password'),
+            'security_token': data.get('token'),
             'version': apiVersion
         }
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
-    except KeyError as e:
-        error_data = response.json()['data']
-        print(f"An error occurred: {error_data['error']}")
+        raise e
 
 
 def get_sf_connection(vault_name="Jitterbit Integration Customer Users", item_name='Rene Demo Integration User'):
