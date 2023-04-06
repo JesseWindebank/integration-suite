@@ -5,7 +5,6 @@ from auth.endpoints.auth_twocloudnine_payroll import get_credentials
 
 class TestGetCredentialsIntegration(unittest.TestCase):
     def test_get_credentials_positive(self):
-        # Replace 'valid_vault_name' and 'valid_item_name' with values that exist in your 1Password account
         valid_vault_name = os.environ.get('ONEPASSWORD_VAULT_NAME')
         valid_item_name = os.environ.get('ONEPASSWORD_ITEM_NAME')
 
@@ -20,7 +19,6 @@ class TestGetCredentialsIntegration(unittest.TestCase):
             self.fail(f"Unexpected exception occurred: {e}")
 
     def test_get_credentials_negative(self):
-        # Replace 'invalid_vault_name' and 'invalid_item_name' with values that don't exist in your 1Password account
         invalid_vault_name = os.environ.get('ONEPASSWORD_INVALID_VAULT_NAME')
         invalid_item_name = os.environ.get('ONEPASSWORD_INVALID_ITEM_NAME')
 
